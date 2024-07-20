@@ -4,6 +4,8 @@ let timeLeft = 5; // 25分钟 = 1500秒
 const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('startButton');
 const resetButton = document.getElementById('resetButton');
+const timeInput = document.getElementById('timeInput');
+const setTimeButton = document.getElementById('setTimeButton');
 
 function updateDisplay() {
     const minutes = Math.floor(timeLeft / 60);
@@ -21,6 +23,7 @@ function startTimer() {
         }
     }, 1000);
     startButton.disabled = true;
+    setTimeButton.disabled = true;
 }
 
 function resetTimer() {
@@ -28,9 +31,21 @@ function resetTimer() {
     timeLeft = 5;
     updateDisplay();
     startButton.disabled = false;
+    setTimeButton.disabled = false;
+}
+
+function setTime() {
+    const inputMinutes = parseInt(timeInput.value);
+    if (inputMinutes > 0 && inputMinutes <= 60) {
+        timeLeft = inputMinutes * 60;
+        updateDisplay();
+    } else {
+        alert('请输入1到60之间的数字');
+    }
 }
 
 startButton.addEventListener('click', startTimer);
 resetButton.addEventListener('click', resetTimer);
+setTimeButton.addEventListener('click', setTime);
 
 updateDisplay();
