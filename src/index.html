@@ -26,8 +26,35 @@
                 <input type="time" id="recordStartTime" required>
                 <label for="recordEndTime">End Time:</label>
                 <input type="time" id="recordEndTime" required>
-                <button type="submit">Add Record</button>
-                <button type="button" id="cancelAddRecord">Cancel</button>
+                <div class="button-group">
+                    <button type="submit" class="confirm-btn">Add Record</button>
+                    <button type="button" id="cancelAddRecord" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="modifyTimeModal" class="modal">
+        <div class="modal-content">
+            <h2>Modify Time</h2>
+            <form id="modifyTimeForm">
+                <div class="time-inputs">
+                    <div class="time-input-group">
+                        <label for="hours">Hours:</label>
+                        <select id="hours"></select>
+                    </div>
+                    <div class="time-input-group">
+                        <label for="minutes">Minutes:</label>
+                        <select id="minutes"></select>
+                    </div>
+                    <div class="time-input-group">
+                        <label for="seconds">Seconds:</label>
+                        <select id="seconds"></select>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="confirm-btn">Confirm</button>
+                    <button type="button" id="cancelModifyTime" class="cancel-btn">Cancel</button>
+                </div>
             </form>
         </div>
     </div>

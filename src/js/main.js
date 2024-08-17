@@ -32,16 +32,38 @@ function resetTimer() {
     startButton.disabled = false;
 }
 
-function modifyTime(event) {
-    const [minutes, seconds] = timerDisplay.textContent.split(':').map(Number);
-    const isLeftSide = event.offsetX < timerDisplay.clientWidth / 2;
+function showModifyTimeModal() {
+    const modal = document.getElementById('modifyTimeModal');
+    modal.style.display = 'block';
+    populateTimeSelects();
+}
 
-    const newTime = prompt(`Enter new ${isLeftSide ? 'minutes' : 'seconds'}:`, isLeftSide ? minutes : seconds);
-    if (newTime !== null) {
-        const newMinutes = isLeftSide ? parseInt(newTime) || 0 : minutes;
-        const newSeconds = isLeftSide ? seconds : parseInt(newTime) || 0;
-        timer.modifyTime(newMinutes, newSeconds);
+function hideModifyTimeModal() {
+    document.getElementById('modifyTimeModal').style.display = 'none';
+}
+
+function populateTimeSelects() {
+    const hours = document.getElementById('hours');
+    const minutes = document.getElementById('minutes');
+    const seconds = document.getElementById('seconds');
+
+    for (let i = 0; i < 24; i++) {
+        hours.options[hours.options.length] = new Option(i.toString().padStart(2, '0'), i);
     }
+    for (let i = 0; i < 60; i++) {
+        minutes.options[minutes.options.length] = new Option(i.toString().padStart(2, '0'), i);
+        seconds.options[seconds.options.length] = new Option(i.toString().padStart(2, '0'), i);
+    }
+}
+
+function modifyTime(event) {
+    event.preventDefault();
+    const hours = parseInt(document.getElementById('hours').value);
+    const minutes = parseInt(document.getElementById('minutes').value);
+    const seconds = parseInt(document.getElementById('seconds').value);
+    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    timer.modifyTime(totalSeconds);
+    hideModifyTimeModal();
 }
 
 function displayRecords() {
@@ -139,7 +161,9 @@ document.getElementById('addRecordButton').addEventListener('click', showAddReco
 document.getElementById('cancelAddRecord').addEventListener('click', hideAddRecordModal);
 document.getElementById('addRecordForm').addEventListener('submit', addManualRecord);
 
-timerDisplay.addEventListener('click', modifyTime);
+timerDisplay.addEventListener('click', showModifyTimeModal);
+document.getElementById('modifyTimeForm').addEventListener('submit', modifyTime);
+document.getElementById('cancelModifyTime').addEventListener('click', hideModifyTimeModal);
 startButton.addEventListener('click', startTimer);
 resetButton.addEventListener('click', resetTimer);
 

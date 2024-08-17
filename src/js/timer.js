@@ -31,8 +31,8 @@ class Timer {
         if (this.onTick) this.onTick(this.currentTime);
     }
 
-    modifyTime(newMinutes, newSeconds) {
-        this.totalTime = newMinutes * 60 + newSeconds;
+    modifyTime(totalSeconds) {
+        this.totalTime = totalSeconds;
         localStorage.setItem('totalTime', this.totalTime);
         this.currentTime = this.totalTime;
         if (this.onTick) this.onTick(this.currentTime);
