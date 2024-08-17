@@ -79,6 +79,39 @@ function displayRecords() {
     }
 }
 
+function showAddRecordModal() {
+    document.getElementById('addRecordModal').style.display = 'block';
+}
+
+function hideAddRecordModal() {
+    document.getElementById('addRecordModal').style.display = 'none';
+}
+
+function addManualRecord(event) {
+    event.preventDefault();
+    const date = document.getElementById('recordDate').value;
+    const startTime = document.getElementById('recordStartTime').value;
+    const endTime = document.getElementById('recordEndTime').value;
+
+    if (date && startTime && endTime) {
+        const start = new Date(`${date}T${startTime}`);
+        const end = new Date(`${date}T${endTime}`);
+        const durationInSeconds = Math.round((end - start) / 1000);
+
+        if (durationInSeconds > 0) {
+            records.addManualRecord(date, startTime, endTime, durationInSeconds);
+            displayRecords();
+            hideAddRecordModal();
+        } else {
+            alert("Invalid time range. End time must be after start time.");
+        }
+    }
+}
+
+document.getElementById('addRecordButton').addEventListener('click', showAddRecordModal);
+document.getElementById('cancelAddRecord').addEventListener('click', hideAddRecordModal);
+document.getElementById('addRecordForm').addEventListener('submit', addManualRecord);
+
 timerDisplay.addEventListener('click', modifyTime);
 startButton.addEventListener('click', startTimer);
 resetButton.addEventListener('click', resetTimer);

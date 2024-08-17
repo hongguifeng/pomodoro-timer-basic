@@ -5,13 +5,43 @@ class Records {
 
     addRecord(startTime, endTime, duration) {
         const record = {
-            date: startTime.toLocaleDateString(),
-            startTime: startTime.toLocaleTimeString(),
-            endTime: endTime.toLocaleTimeString(),
-            duration: duration
+            date: this.formatDate(startTime),
+            startTime: this.formatTime(startTime),
+            endTime: this.formatTime(endTime),
+            duration: this.formatDuration(duration)
         };
         this.records.push(record);
         this.saveRecords();
+    }
+
+    addManualRecord(date, startTime, endTime, duration) {
+        const start = new Date(`${date}T${startTime}`);
+        const end = new Date(`${date}T${endTime}`);
+        const record = {
+            date: this.formatDate(start),
+            startTime: this.formatTime(start),
+            endTime: this.formatTime(end),
+            duration: this.formatDuration(duration)
+        };
+        this.records.push(record);
+        this.saveRecords();
+    }
+
+    formatDate(date) {
+        const offset = date.getTimezoneOffset();
+        const adjustedDate = new Date(date.getTime() - offset * 60 * 1000);
+        return adjustedDate.toISOString().split('T')[0];
+    }
+
+    formatTime(date) {
+        return date.toTimeString().split(' ')[0];
+    }
+
+    formatDuration(duration) {
+        const hours = Math.floor(duration / 3600);
+        const minutes = Math.floor((duration % 3600) / 60);
+        const seconds = duration % 60;
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
 
     saveRecords() {
@@ -39,15 +69,9 @@ class Records {
             <span class="record-item record-number">#${index + 1}</span>
             <span class="record-item record-start">${record.startTime}</span>
             <span class="record-item record-end">${record.endTime}</span>
-            <span class="record-item record-duration">${this.formatDuration(record.duration)}</span>
+            <span class="record-item record-duration">${record.duration}</span>
         `;
         return li;
-    }
-
-    formatDuration(duration) {
-        const minutes = Math.floor(duration / 60);
-        const seconds = duration % 60;
-        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
 }
 

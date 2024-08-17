@@ -12,7 +12,23 @@
         <div id="timer">25:00</div>
         <button id="startButton">Start</button>
         <button id="resetButton">Reset</button>
+        <button id="addRecordButton">Add Record</button>
         <div id="records"></div>
+    </div>
+    <div id="addRecordModal" class="modal">
+        <div class="modal-content">
+            <h2>Add New Record</h2>
+            <form id="addRecordForm">
+                <label for="recordDate">Date:</label>
+                <input type="date" id="recordDate" required>
+                <label for="recordStartTime">Start Time:</label>
+                <input type="time" id="recordStartTime" required>
+                <label for="recordEndTime">End Time:</label>
+                <input type="time" id="recordEndTime" required>
+                <button type="submit">Add Record</button>
+                <button type="button" id="cancelAddRecord">Cancel</button>
+            </form>
+        </div>
     </div>
     <script type="module" src="js/main.js"></script>
 </body>
