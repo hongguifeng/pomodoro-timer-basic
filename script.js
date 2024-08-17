@@ -1,23 +1,23 @@
 let timer;
-let timeLeft = localStorage.getItem('timeLeft') ? parseInt(localStorage.getItem('timeLeft')) : 1500; // Default 25 minutes
-let initialTimeLeft = timeLeft; // Record initial time
+let totalTime = localStorage.getItem('totalTime') ? parseInt(localStorage.getItem('totalTime')) : 1500; // Default 25 minutes
+let currentTime = totalTime; // Record current timer time
 
 const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('startButton');
 const resetButton = document.getElementById('resetButton');
 
 function updateDisplay() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
+    const minutes = Math.floor(currentTime / 60);
+    const seconds = currentTime % 60;
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
 function startTimer() {
-    initialTimeLeft = timeLeft; // Record current time before starting
+    currentTime = totalTime; // Record current time before starting
     timer = setInterval(() => {
-        timeLeft--;
+        currentTime--;
         updateDisplay();
-        if (timeLeft === 0) {
+        if (currentTime === 0) {
             clearInterval(timer); // Stop timer
             alert('Time is up!');
             resetTimer(); // Call reset function to restore time
@@ -28,7 +28,7 @@ function startTimer() {
 
 function resetTimer() {
     clearInterval(timer);
-    timeLeft = initialTimeLeft; // Restore to modified time
+    currentTime = totalTime; // Restore to modified time
     updateDisplay();
     startButton.disabled = false;
 }
@@ -40,11 +40,12 @@ function modifyTime(event) {
     const newTime = prompt(`Enter new ${isLeftSide ? 'minutes' : 'seconds'}:`, isLeftSide ? minutes : seconds);
     if (newTime !== null) {
         if (isLeftSide) {
-            timeLeft = (parseInt(newTime) || 0) * 60 + seconds; // Update minutes
+            totalTime = (parseInt(newTime) || 0) * 60 + seconds; // Update total minutes
         } else {
-            timeLeft = minutes * 60 + (parseInt(newTime) || 0); // Update seconds
+            totalTime = minutes * 60 + (parseInt(newTime) || 0); // Update total seconds
         }
-        localStorage.setItem('timeLeft', timeLeft); // Save to localStorage
+        localStorage.setItem('totalTime', totalTime); // Save to localStorage
+        currentTime = totalTime; // Update currentTime to reflect the new totalTime
         updateDisplay();
     }
 }
