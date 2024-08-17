@@ -57,7 +57,7 @@ function displayRecords() {
         headerRow.className = 'record-row record-header-row';
         headerRow.innerHTML = `
             <span class="record-item record-checkbox"><input type="checkbox" id="selectAll"></span>
-            <span class="record-item record-number">Number</span>
+            <span class="record-item record-number">Num</span>
             <span class="record-item record-start">Start</span>
             <span class="record-item record-end">End</span>
             <span class="record-item record-duration">Duration</span>
