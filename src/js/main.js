@@ -16,20 +16,30 @@ function onTimerComplete(startTime, endTime, duration) {
     records.addRecord(startTime, endTime, duration);
     alert('Time is up!');
     displayRecords();
-    resetTimer();
+    startButton.textContent = 'Start';
 }
 
 timer.onTick = updateDisplay;
 timer.onComplete = onTimerComplete;
 
-function startTimer() {
-    timer.start();
-    startButton.disabled = true;
+function toggleTimer() {
+    if (!timer.timer) {
+        timer.start();
+        startButton.textContent = 'Pause';
+    } else {
+        if (timer.isPaused) {
+            timer.resume();
+            startButton.textContent = 'Pause';
+        } else {
+            timer.pause();
+            startButton.textContent = 'Resume';
+        }
+    }
 }
 
 function resetTimer() {
-    timer.reset();
-    startButton.disabled = false;
+    timer.stop();
+    startButton.textContent = 'Start';
 }
 
 function showModifyTimeModal() {
@@ -164,7 +174,7 @@ document.getElementById('addRecordForm').addEventListener('submit', addManualRec
 timerDisplay.addEventListener('click', showModifyTimeModal);
 document.getElementById('modifyTimeForm').addEventListener('submit', modifyTime);
 document.getElementById('cancelModifyTime').addEventListener('click', hideModifyTimeModal);
-startButton.addEventListener('click', startTimer);
+startButton.addEventListener('click', toggleTimer);
 resetButton.addEventListener('click', resetTimer);
 
 document.addEventListener('change', function(e) {

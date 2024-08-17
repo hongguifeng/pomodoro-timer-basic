@@ -5,29 +5,34 @@ class Timer {
         this.timer = null;
         this.onTick = null;
         this.onComplete = null;
+        this.isPaused = false;
     }
 
     start() {
+        if (this.timer) {
+            clearInterval(this.timer);
+        }
         this.currentTime = this.totalTime;
+        this.isPaused = false;
         const startTime = new Date();
         this.timer = setInterval(() => {
-            this.currentTime--;
-            if (this.onTick) this.onTick(this.currentTime);
-            if (this.currentTime === 0) {
-                this.stop();
-                const endTime = new Date();
-                if (this.onComplete) this.onComplete(startTime, endTime, this.totalTime);
+            if (!this.isPaused) {
+                this.currentTime--;
+                if (this.onTick) this.onTick(this.currentTime);
+                if (this.currentTime === 0) {
+                    this.stop();
+                    const endTime = new Date();
+                    if (this.onComplete) this.onComplete(startTime, endTime, this.totalTime);
+                }
             }
         }, 1000);
     }
 
     stop() {
         clearInterval(this.timer);
-    }
-
-    reset() {
-        this.stop();
+        this.timer = null;
         this.currentTime = this.totalTime;
+        this.isPaused = false;
         if (this.onTick) this.onTick(this.currentTime);
     }
 
@@ -42,6 +47,14 @@ class Timer {
         const minutes = Math.floor(this.currentTime / 60);
         const seconds = this.currentTime % 60;
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    pause() {
+        this.isPaused = true;
+    }
+
+    resume() {
+        this.isPaused = false;
     }
 }
 
