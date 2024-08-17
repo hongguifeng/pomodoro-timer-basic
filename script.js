@@ -35,22 +35,17 @@ function resetTimer() {
 
 function modifyTime(event) {
     const [minutes, seconds] = timerDisplay.textContent.split(':').map(Number);
-    if (event.offsetX < timerDisplay.clientWidth / 2) {
-        // Click left side, modify minutes
-        const newMinutes = prompt('Enter new minutes:', minutes);
-        if (newMinutes !== null) {
-            timeLeft = (parseInt(newMinutes) || 0) * 60 + seconds;
-            localStorage.setItem('timeLeft', timeLeft); // Save to localStorage
-            updateDisplay();
+    const isLeftSide = event.offsetX < timerDisplay.clientWidth / 2;
+
+    const newTime = prompt(`Enter new ${isLeftSide ? 'minutes' : 'seconds'}:`, isLeftSide ? minutes : seconds);
+    if (newTime !== null) {
+        if (isLeftSide) {
+            timeLeft = (parseInt(newTime) || 0) * 60 + seconds; // Update minutes
+        } else {
+            timeLeft = minutes * 60 + (parseInt(newTime) || 0); // Update seconds
         }
-    } else {
-        // Click right side, modify seconds
-        const newSeconds = prompt('Enter new seconds:', seconds);
-        if (newSeconds !== null) {
-            timeLeft = minutes * 60 + (parseInt(newSeconds) || 0);
-            localStorage.setItem('timeLeft', timeLeft); // Save to localStorage
-            updateDisplay();
-        }
+        localStorage.setItem('timeLeft', timeLeft); // Save to localStorage
+        updateDisplay();
     }
 }
 
