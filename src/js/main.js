@@ -71,13 +71,26 @@ function displayRecords() {
             recordsList.appendChild(dateHeader);
             
             dateRecords.forEach((record, index) => {
-                const li = records.createRecordListItem(record, index + 1);
+                const li = createRecordListItem(record, index + 1);
                 recordsList.appendChild(li);
             });
         }
         
         recordsContainer.appendChild(recordsList);
     }
+}
+
+function createRecordListItem(record, index) {
+    const li = document.createElement('li');
+    li.className = 'record-row';
+    li.innerHTML = `
+        <span class="record-item record-checkbox"><input type="checkbox" data-record-id="${record.id}"></span>
+        <span class="record-item record-number">#${index}</span>
+        <span class="record-item record-start">${record.startTime}</span>
+        <span class="record-item record-end">${record.endTime}</span>
+        <span class="record-item record-duration">${record.duration}</span>
+    `;
+    return li;
 }
 
 function showAddRecordModal() {

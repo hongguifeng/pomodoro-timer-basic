@@ -72,19 +72,6 @@ class Records {
         );
     }
 
-    createRecordListItem(record, index) {
-        const li = document.createElement('li');
-        li.className = 'record-row';
-        li.innerHTML = `
-            <span class="record-item record-checkbox"><input type="checkbox" data-record-id="${record.id}"></span>
-            <span class="record-item record-number">#${index}</span>
-            <span class="record-item record-start">${record.startTime}</span>
-            <span class="record-item record-end">${record.endTime}</span>
-            <span class="record-item record-duration">${record.duration}</span>
-        `;
-        return li;
-    }
-
     deleteRecords(recordIds) {
         this.records = this.records.filter(record => !recordIds.includes(record.id));
         this.nextId = this.records.length > 0 ? Math.max(...this.records.map(r => r.id)) + 1 : 1;
