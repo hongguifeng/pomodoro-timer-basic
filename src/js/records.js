@@ -1,10 +1,19 @@
 class Records {
     constructor() {
         this.records = JSON.parse(localStorage.getItem('pomodoroRecords')) || [];
+        this.nextId = 1; // Initialize nextId to 1
+        // Check for existing records without ID
+        this.records.forEach(record => {
+            if (!record.id) {
+                record.id = this.nextId++; // Assign new ID if missing
+            }
+        });
+        this.nextId = this.records.length > 0 ? Math.max(...this.records.map(r => r.id)) + 1 : this.nextId;
     }
 
     addRecord(startTime, endTime, duration) {
         const record = {
+            id: this.nextId++, // Generate ID
             date: this.formatDate(startTime),
             startTime: this.formatTime(startTime),
             endTime: this.formatTime(endTime),
@@ -18,6 +27,7 @@ class Records {
         const start = new Date(`${date}T${startTime}`);
         const end = new Date(`${date}T${endTime}`);
         const record = {
+            id: this.nextId++, // Generate ID
             date: this.formatDate(start),
             startTime: this.formatTime(start),
             endTime: this.formatTime(end),
@@ -66,12 +76,19 @@ class Records {
         const li = document.createElement('li');
         li.className = 'record-row';
         li.innerHTML = `
+            <span class="record-item record-checkbox"><input type="checkbox" data-record-id="${record.id}"></span>
             <span class="record-item record-number">#${index + 1}</span>
             <span class="record-item record-start">${record.startTime}</span>
             <span class="record-item record-end">${record.endTime}</span>
             <span class="record-item record-duration">${record.duration}</span>
         `;
         return li;
+    }
+
+    deleteRecords(recordIds) {
+        this.records = this.records.filter(record => !recordIds.includes(record.id));
+        this.nextId = this.records.length > 0 ? Math.max(...this.records.map(r => r.id)) + 1 : 1;
+        this.saveRecords();
     }
 }
 

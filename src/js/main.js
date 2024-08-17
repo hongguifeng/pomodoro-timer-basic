@@ -56,6 +56,7 @@ function displayRecords() {
         const headerRow = document.createElement('li');
         headerRow.className = 'record-row record-header-row';
         headerRow.innerHTML = `
+            <span class="record-item record-checkbox"><input type="checkbox" id="selectAll"></span>
             <span class="record-item record-number">Number</span>
             <span class="record-item record-start">Start</span>
             <span class="record-item record-end">End</span>
@@ -63,15 +64,17 @@ function displayRecords() {
         `;
         recordsList.appendChild(headerRow);
         
+        let recordIndex = 0;
         for (const [date, dateRecords] of Object.entries(groupedRecords)) {
             const dateHeader = document.createElement('li');
             dateHeader.className = 'date-header';
             dateHeader.textContent = date;
             recordsList.appendChild(dateHeader);
             
-            dateRecords.forEach((record, index) => {
-                const li = records.createRecordListItem(record, dateRecords.length - 1 - index);
+            dateRecords.forEach((record) => {
+                const li = records.createRecordListItem(record, recordIndex);
                 recordsList.appendChild(li);
+                recordIndex++;
             });
         }
         
@@ -115,6 +118,35 @@ document.getElementById('addRecordForm').addEventListener('submit', addManualRec
 timerDisplay.addEventListener('click', modifyTime);
 startButton.addEventListener('click', startTimer);
 resetButton.addEventListener('click', resetTimer);
+
+document.addEventListener('change', function(e) {
+    if (e.target && e.target.type === 'checkbox') {
+        const deleteButton = document.getElementById('deleteSelectedRecords');
+        const checkboxes = document.querySelectorAll('.record-checkbox input[type="checkbox"]');
+        const checkedBoxes = document.querySelectorAll('.record-checkbox input[type="checkbox"]:checked');
+        
+        if (e.target.id === 'selectAll') {
+            checkboxes.forEach(checkbox => checkbox.checked = e.target.checked);
+        }
+        
+        deleteButton.style.display = checkedBoxes.length > 0 ? 'inline-block' : 'none';
+    }
+});
+
+document.getElementById('deleteSelectedRecords').addEventListener('click', function() {
+    const checkedBoxes = document.querySelectorAll('.record-checkbox input[type="checkbox"]:checked');
+    const recordIds = Array.from(checkedBoxes)
+        .filter(checkbox => checkbox.id !== 'selectAll')
+        .map(checkbox => parseInt(checkbox.dataset.recordId));
+
+    if (recordIds.length > 0) {
+        records.deleteRecords(recordIds);
+        displayRecords();
+    }
+
+    document.getElementById('selectAll').checked = false;
+    document.getElementById('deleteSelectedRecords').style.display = 'none';
+});
 
 updateDisplay();
 displayRecords();

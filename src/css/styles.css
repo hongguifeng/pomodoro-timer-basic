@@ -191,3 +191,20 @@ button {
 #addRecordForm button {
     margin-top: 10px;
 }
+
+.record-checkbox {
+    flex: 0 0 30px;
+}
+
+#deleteSelectedRecords {
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#deleteSelectedRecords:hover {
+    background-color: #c82333;
+}
