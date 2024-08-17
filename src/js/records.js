@@ -77,7 +77,7 @@ class Records {
         li.className = 'record-row';
         li.innerHTML = `
             <span class="record-item record-checkbox"><input type="checkbox" data-record-id="${record.id}"></span>
-            <span class="record-item record-number">#${index + 1}</span>
+            <span class="record-item record-number">#${index}</span>
             <span class="record-item record-start">${record.startTime}</span>
             <span class="record-item record-end">${record.endTime}</span>
             <span class="record-item record-duration">${record.duration}</span>

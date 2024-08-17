@@ -64,17 +64,15 @@ function displayRecords() {
         `;
         recordsList.appendChild(headerRow);
         
-        let recordIndex = 0;
         for (const [date, dateRecords] of Object.entries(groupedRecords)) {
             const dateHeader = document.createElement('li');
             dateHeader.className = 'date-header';
             dateHeader.textContent = date;
             recordsList.appendChild(dateHeader);
             
-            dateRecords.forEach((record) => {
-                const li = records.createRecordListItem(record, recordIndex);
+            dateRecords.forEach((record, index) => {
+                const li = records.createRecordListItem(record, index + 1);
                 recordsList.appendChild(li);
-                recordIndex++;
             });
         }
         
