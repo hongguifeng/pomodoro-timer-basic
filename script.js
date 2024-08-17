@@ -1,6 +1,6 @@
 let timer;
-let timeLeft = 1500; // 默认25分钟
-let initialTimeLeft = timeLeft; // 记录初始时间
+let timeLeft = 1500; // Default 25 minutes
+let initialTimeLeft = timeLeft; // Record initial time
 
 const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('startButton');
@@ -13,14 +13,14 @@ function updateDisplay() {
 }
 
 function startTimer() {
-    initialTimeLeft = timeLeft; // 开始计时前记录当前时间
+    initialTimeLeft = timeLeft; // Record current time before starting
     timer = setInterval(() => {
         timeLeft--;
         updateDisplay();
         if (timeLeft === 0) {
-            clearInterval(timer); // 停止计时器
-            alert('时间到!');
-            resetTimer(); // 调用重置函数来恢复时间
+            clearInterval(timer); // Stop timer
+            alert('Time is up!');
+            resetTimer(); // Call reset function to restore time
         }
     }, 1000);
     startButton.disabled = true;
@@ -28,7 +28,7 @@ function startTimer() {
 
 function resetTimer() {
     clearInterval(timer);
-    timeLeft = initialTimeLeft; // 恢复为修改的时间
+    timeLeft = initialTimeLeft; // Restore to modified time
     updateDisplay();
     startButton.disabled = false;
 }
@@ -36,15 +36,15 @@ function resetTimer() {
 function modifyTime(event) {
     const [minutes, seconds] = timerDisplay.textContent.split(':').map(Number);
     if (event.offsetX < timerDisplay.clientWidth / 2) {
-        // 点击左边，修改分钟
-        const newMinutes = prompt('输入新的分钟数:', minutes);
+        // Click left side, modify minutes
+        const newMinutes = prompt('Enter new minutes:', minutes);
         if (newMinutes !== null) {
             timeLeft = (parseInt(newMinutes) || 0) * 60 + seconds;
             updateDisplay();
         }
     } else {
-        // 点击右边，修改秒钟
-        const newSeconds = prompt('输入新的秒数:', seconds);
+        // Click right side, modify seconds
+        const newSeconds = prompt('Enter new seconds:', seconds);
         if (newSeconds !== null) {
             timeLeft = minutes * 60 + (parseInt(newSeconds) || 0);
             updateDisplay();
