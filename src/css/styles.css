@@ -6,6 +6,8 @@
     --dark-gray: #333;
     --border-color: #ccc;
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --time-color: #4a90e2;
+    --duration-color: #e67e22;
 }
 
 body {
@@ -131,10 +133,18 @@ button {
 }
 
 .record-number { flex: 0 0 45px; }
-.record-start,
-.record-end { flex: 0 0 75px; }
+.record-time { flex: 0 0 150px; }
 .record-duration { flex: 1 0 75px; }
 .record-checkbox { flex: 0 0 30px; }
+
+.record-time {
+    color: var(--time-color);
+}
+
+.record-duration {
+    color: var(--duration-color);
+    font-weight: bold;
+}
 
 .modal {
     display: none;

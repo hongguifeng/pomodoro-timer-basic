@@ -77,8 +77,7 @@ function createHeaderRow() {
     headerRow.innerHTML = `
         <span class="record-item record-checkbox"><input type="checkbox" id="selectAll"></span>
         <span class="record-item record-number">Num</span>
-        <span class="record-item record-start">Start</span>
-        <span class="record-item record-end">End</span>
+        <span class="record-item record-time">Time</span>
         <span class="record-item record-duration">Duration</span>
     `;
     return headerRow;
@@ -97,8 +96,7 @@ function createRecordListItem(record, index) {
     li.innerHTML = `
         <span class="record-item record-checkbox"><input type="checkbox" data-record-id="${record.id}"></span>
         <span class="record-item record-number">#${index}</span>
-        <span class="record-item record-start">${record.startTime}</span>
-        <span class="record-item record-end">${record.endTime}</span>
+        <span class="record-item record-time">${record.startTime} - ${record.endTime}</span>
         <span class="record-item record-duration">${record.duration}</span>
     `;
     return li;
