@@ -90,14 +90,6 @@ button {
 .record-number {
     font-weight: bold;
     color: var(--primary-color);
-    margin-right: 10px;
-}
-
-.record-time,
-.record-duration {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
 }
 
 .time-label {
@@ -138,10 +130,10 @@ button {
     text-overflow: ellipsis;
 }
 
-.record-number { flex: 0 0 70px; }
+.record-number { flex: 0 0 45px; }
 .record-start,
 .record-end { flex: 0 0 75px; }
-.record-duration { flex: 0 0 70px; }
+.record-duration { flex: 1 0 75px; }
 .record-checkbox { flex: 0 0 30px; }
 
 .modal {
