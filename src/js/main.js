@@ -53,6 +53,16 @@ function displayRecords() {
         const groupedRecords = records.groupRecordsByDate();
         const recordsList = document.createElement('ul');
         
+        const headerRow = document.createElement('li');
+        headerRow.className = 'record-row record-header-row';
+        headerRow.innerHTML = `
+            <span class="record-item record-number">Number</span>
+            <span class="record-item record-start">Start</span>
+            <span class="record-item record-end">End</span>
+            <span class="record-item record-duration">Duration</span>
+        `;
+        recordsList.appendChild(headerRow);
+        
         for (const [date, dateRecords] of Object.entries(groupedRecords)) {
             const dateHeader = document.createElement('li');
             dateHeader.className = 'date-header';

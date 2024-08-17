@@ -27,13 +27,13 @@ button {
 #records {
     margin-top: 20px;
     text-align: left;
-    max-height: 400px;
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 15px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border-radius: 5px;
+    width: 420px;
 }
 
 #records h2 {
@@ -46,6 +46,7 @@ button {
 #records ul {
     list-style-type: none;
     padding: 0;
+    width: 100%;
 }
 
 #records li {
@@ -66,11 +67,15 @@ button {
     border-radius: 3px;
 }
 
+#records .record-header-row {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
 #records .record-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    padding: 5px 0;
 }
 
 #records .record-number {
@@ -105,4 +110,46 @@ button {
 #records .no-records {
     color: #666;
     font-style: italic;
+}
+
+.record-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.record-header-row {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.record-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.record-number {
+    flex: 0 0 70px;
+}
+
+.record-start,
+.record-end {
+    flex: 0 0 75px;
+}
+
+.record-duration {
+    flex: 0 0 70px;
+}
+
+.date-header {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
 }

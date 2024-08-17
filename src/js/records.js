@@ -33,27 +33,21 @@ class Records {
     }
 
     createRecordListItem(record, index) {
-        const durationMinutes = Math.floor(record.duration / 60);
-        const durationSeconds = record.duration % 60;
         const li = document.createElement('li');
+        li.className = 'record-row';
         li.innerHTML = `
-            <div class="record-header">
-                <span class="record-number">#${index + 1}</span>
-                <span class="record-time">
-                    <span class="time-label">Start:</span>
-                    <span class="start-time">${record.startTime}</span>
-                </span>
-                <span class="record-time">
-                    <span class="time-label">End:</span>
-                    <span class="end-time">${record.endTime}</span>
-                </span>
-                <span class="record-duration">
-                    <span class="time-label">Duration:</span>
-                    <span>${durationMinutes.toString().padStart(2, '0')}:${durationSeconds.toString().padStart(2, '0')}</span>
-                </span>
-            </div>
+            <span class="record-item record-number">#${index + 1}</span>
+            <span class="record-item record-start">${record.startTime}</span>
+            <span class="record-item record-end">${record.endTime}</span>
+            <span class="record-item record-duration">${this.formatDuration(record.duration)}</span>
         `;
         return li;
+    }
+
+    formatDuration(duration) {
+        const minutes = Math.floor(duration / 60);
+        const seconds = duration % 60;
+        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
 }
 
