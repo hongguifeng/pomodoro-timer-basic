@@ -23,7 +23,7 @@ timer.onTick = updateDisplay;
 timer.onComplete = onTimerComplete;
 
 function toggleTimer() {
-    if (!timer.timer) {
+    if (!timer.isRunning) {
         timer.start();
         startButton.textContent = 'Pause';
     } else {
