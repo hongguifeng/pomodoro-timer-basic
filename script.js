@@ -1,5 +1,5 @@
 let timer;
-let timeLeft = 1500; // Default 25 minutes
+let timeLeft = localStorage.getItem('timeLeft') ? parseInt(localStorage.getItem('timeLeft')) : 1500; // Default 25 minutes
 let initialTimeLeft = timeLeft; // Record initial time
 
 const timerDisplay = document.getElementById('timer');
@@ -40,6 +40,7 @@ function modifyTime(event) {
         const newMinutes = prompt('Enter new minutes:', minutes);
         if (newMinutes !== null) {
             timeLeft = (parseInt(newMinutes) || 0) * 60 + seconds;
+            localStorage.setItem('timeLeft', timeLeft); // Save to localStorage
             updateDisplay();
         }
     } else {
@@ -47,6 +48,7 @@ function modifyTime(event) {
         const newSeconds = prompt('Enter new seconds:', seconds);
         if (newSeconds !== null) {
             timeLeft = minutes * 60 + (parseInt(newSeconds) || 0);
+            localStorage.setItem('timeLeft', timeLeft); // Save to localStorage
             updateDisplay();
         }
     }
