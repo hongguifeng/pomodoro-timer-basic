@@ -1,0 +1,20 @@
+{
+  "name": "pomodoro-timer",
+  "version": "1.0.0",
+  "description": "A simple Pomodoro Timer web application",
+  "main": "src/js/main.js",
+  "scripts": {
+    "start": "http-server src -p 3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pomodoro",
+    "timer",
+    "productivity"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
