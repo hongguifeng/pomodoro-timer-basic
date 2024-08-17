@@ -59,17 +59,14 @@ class Records {
     }
 
     groupRecordsByDate() {
-        const groups = this.records.reduce((groups, record) => {
-            const date = record.date;
-            if (!groups[date]) {
-                groups[date] = [];
+        const groups = new Map();
+        this.records.forEach(record => {
+            if (!groups.has(record.date)) {
+                groups.set(record.date, []);
             }
-            groups[date].unshift(record);
-            return groups;
-        }, {});
-        return Object.fromEntries(
-            Object.entries(groups).sort((a, b) => new Date(b[0]) - new Date(a[0]))
-        );
+            groups.get(record.date).unshift(record);
+        });
+        return new Map([...groups.entries()].sort((a, b) => new Date(b[0]) - new Date(a[0])));
     }
 
     deleteRecords(recordIds) {

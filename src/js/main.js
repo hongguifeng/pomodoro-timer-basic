@@ -47,37 +47,48 @@ function modifyTime(event) {
 function displayRecords() {
     const recordsContainer = document.getElementById('records');
     recordsContainer.innerHTML = '<h2>Pomodoro Records</h2>';
+    
     if (records.records.length === 0) {
         recordsContainer.innerHTML += '<p class="no-records">No records available</p>';
     } else {
         const groupedRecords = records.groupRecordsByDate();
-        const recordsList = document.createElement('ul');
-        
-        const headerRow = document.createElement('li');
-        headerRow.className = 'record-row record-header-row';
-        headerRow.innerHTML = `
-            <span class="record-item record-checkbox"><input type="checkbox" id="selectAll"></span>
-            <span class="record-item record-number">Num</span>
-            <span class="record-item record-start">Start</span>
-            <span class="record-item record-end">End</span>
-            <span class="record-item record-duration">Duration</span>
-        `;
-        recordsList.appendChild(headerRow);
-        
-        for (const [date, dateRecords] of Object.entries(groupedRecords)) {
-            const dateHeader = document.createElement('li');
-            dateHeader.className = 'date-header';
-            dateHeader.textContent = date;
-            recordsList.appendChild(dateHeader);
-            
-            dateRecords.forEach((record, index) => {
-                const li = createRecordListItem(record, index + 1);
-                recordsList.appendChild(li);
-            });
-        }
-        
+        const recordsList = createRecordsList(groupedRecords);
         recordsContainer.appendChild(recordsList);
     }
+}
+
+function createRecordsList(groupedRecords) {
+    const recordsList = document.createElement('ul');
+    recordsList.appendChild(createHeaderRow());
+    
+    for (const [date, dateRecords] of groupedRecords) {
+        recordsList.appendChild(createDateHeader(date));
+        dateRecords.forEach((record, index) => {
+            recordsList.appendChild(createRecordListItem(record, index + 1));
+        });
+    }
+    
+    return recordsList;
+}
+
+function createHeaderRow() {
+    const headerRow = document.createElement('li');
+    headerRow.className = 'record-row record-header-row';
+    headerRow.innerHTML = `
+        <span class="record-item record-checkbox"><input type="checkbox" id="selectAll"></span>
+        <span class="record-item record-number">Num</span>
+        <span class="record-item record-start">Start</span>
+        <span class="record-item record-end">End</span>
+        <span class="record-item record-duration">Duration</span>
+    `;
+    return headerRow;
+}
+
+function createDateHeader(date) {
+    const dateHeader = document.createElement('li');
+    dateHeader.className = 'date-header';
+    dateHeader.textContent = date;
+    return dateHeader;
 }
 
 function createRecordListItem(record, index) {
@@ -131,7 +142,7 @@ startButton.addEventListener('click', startTimer);
 resetButton.addEventListener('click', resetTimer);
 
 document.addEventListener('change', function(e) {
-    if (e.target && e.target.type === 'checkbox') {
+    if (e.target && e.target.closest('#records')) {
         const deleteButton = document.getElementById('deleteSelectedRecords');
         const checkboxes = document.querySelectorAll('.record-checkbox input[type="checkbox"]');
         const checkedBoxes = document.querySelectorAll('.record-checkbox input[type="checkbox"]:checked');
