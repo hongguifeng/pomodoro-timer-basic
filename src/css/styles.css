@@ -76,6 +76,14 @@ button {
     padding: 5px 10px;
     margin: 20px 0 10px;
     border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#records .date-header .total-duration {
+    font-size: 0.9em;
+    opacity: 0.9;
 }
 
 .record-header-row {

@@ -86,7 +86,11 @@ function createHeaderRow() {
 function createDateHeader(date) {
     const dateHeader = document.createElement('li');
     dateHeader.className = 'date-header';
-    dateHeader.textContent = date;
+    const totalDuration = records.calculateTotalDurationForDate(date);
+    dateHeader.innerHTML = `
+        <span class="date">${date}</span>
+        <span class="total-duration">${totalDuration}</span>
+    `;
     return dateHeader;
 }
 

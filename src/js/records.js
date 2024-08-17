@@ -17,7 +17,7 @@ class Records {
             date: this.formatDate(startTime),
             startTime: this.formatTime(startTime),
             endTime: this.formatTime(endTime),
-            duration: this.formatDuration(duration)
+            duration: duration // Store as number
         };
         this.records.push(record);
         this.saveRecords();
@@ -31,7 +31,7 @@ class Records {
             date: this.formatDate(start),
             startTime: this.formatTime(start),
             endTime: this.formatTime(end),
-            duration: this.formatDuration(duration)
+            duration: duration // Store as number
         };
         this.records.push(record);
         this.saveRecords();
@@ -67,6 +67,20 @@ class Records {
             groups.get(record.date).unshift(record);
         });
         return new Map([...groups.entries()].sort((a, b) => new Date(b[0]) - new Date(a[0])));
+    }
+
+    calculateTotalDurationForDate(date) {
+        const records = this.records.filter(record => record.date === date);
+        const totalSeconds = records.reduce((total, record) => {
+            if (typeof record.duration === 'string') {
+                const [hours, minutes, seconds] = record.duration.split(':').map(Number);
+                return total + hours * 3600 + minutes * 60 + seconds;
+            } else if (typeof record.duration === 'number') {
+                return total + record.duration;
+            }
+            return total;
+        }, 0);
+        return this.formatDuration(totalSeconds);
     }
 
     deleteRecords(recordIds) {
