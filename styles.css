@@ -23,3 +23,86 @@ button {
     margin: 0 10px;
     cursor: pointer;
 }
+
+#records {
+    margin-top: 20px;
+    text-align: left;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+#records h2 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+#records ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#records li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#records .date-header {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+#records .record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#records .record-number {
+    font-weight: bold;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+#records .record-time,
+#records .record-duration {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+#records .time-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-right: 5px;
+}
+
+#records .start-time,
+#records .end-time {
+    color: #28a745;
+}
+
+#records .record-duration span:last-child {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+#records .no-records {
+    color: #666;
+    font-style: italic;
+}
