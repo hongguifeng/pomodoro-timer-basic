@@ -75,21 +75,33 @@ button:hover {
 }
 
 #records {
-    margin-top: 20px;
-    text-align: left;
-    border: 1px solid var(--border-color);
-    padding: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.records-header {
+    position: sticky;
+    top: 0;
     background-color: #fff;
-    box-shadow: 0 2px 5px var(--shadow-color);
-    border-radius: 5px;
-    width: 420px;
-    max-height: 50vh;
+    z-index: 1;
+}
+
+.records-header h2 {
+    margin-top: 0;
+    padding-top: 15px;
+}
+
+.records-content {
     overflow-y: auto;
-    align-self: center;
+    max-height: calc(50vh - 80px);
+}
+
+#records ul {
+    margin: 0;
 }
 
 #records h2 {
-    margin-top: 0;
     color: var(--dark-gray);
     border-bottom: 2px solid #eee;
     padding-bottom: 10px;

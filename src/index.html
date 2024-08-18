@@ -16,7 +16,20 @@
             <button id="addRecordButton">Add Record</button>
             <button id="deleteSelectedRecords" style="display: none;">Delete Selected</button>
         </div>
-        <div id="records"></div>
+        <div id="records">
+            <div class="records-header">
+                <h2>Pomodoro Records</h2>
+                <ul>
+                    <li class="record-row record-header-row">
+                        <span class="record-item record-checkbox"><input type="checkbox" id="selectAll"></span>
+                        <span class="record-item record-number">Num</span>
+                        <span class="record-item record-time">Time</span>
+                        <span class="record-item record-duration">Duration</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="records-content"></div>
+        </div>
     </div>
     <div id="addRecordModal" class="modal">
         <div class="modal-content">

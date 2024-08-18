@@ -77,11 +77,11 @@ function modifyTime(event) {
 }
 
 function displayRecords() {
-    const recordsContainer = document.getElementById('records');
-    recordsContainer.innerHTML = '<h2>Pomodoro Records</h2>';
+    const recordsContainer = document.querySelector('#records .records-content');
+    recordsContainer.innerHTML = '';
     
     if (records.records.length === 0) {
-        recordsContainer.innerHTML += '<p class="no-records">No records available</p>';
+        recordsContainer.innerHTML = '<p class="no-records">No records available</p>';
     } else {
         const groupedRecords = records.groupRecordsByDate();
         const recordsList = createRecordsList(groupedRecords);
@@ -91,7 +91,6 @@ function displayRecords() {
 
 function createRecordsList(groupedRecords) {
     const recordsList = document.createElement('ul');
-    recordsList.appendChild(createHeaderRow());
     
     for (const [date, dateRecords] of groupedRecords) {
         recordsList.appendChild(createDateHeader(date));
@@ -101,18 +100,6 @@ function createRecordsList(groupedRecords) {
     }
     
     return recordsList;
-}
-
-function createHeaderRow() {
-    const headerRow = document.createElement('li');
-    headerRow.className = 'record-row record-header-row';
-    headerRow.innerHTML = `
-        <span class="record-item record-checkbox"><input type="checkbox" id="selectAll"></span>
-        <span class="record-item record-number">Num</span>
-        <span class="record-item record-time">Time</span>
-        <span class="record-item record-duration">Duration</span>
-    `;
-    return headerRow;
 }
 
 function createDateHeader(date) {
