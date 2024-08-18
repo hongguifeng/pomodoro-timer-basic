@@ -168,12 +168,11 @@ document.addEventListener('change', function(e) {
     if (e.target && e.target.closest('#records')) {
         const deleteButton = document.getElementById('deleteSelectedRecords');
         const checkboxes = document.querySelectorAll('.record-checkbox input[type="checkbox"]');
-        const checkedBoxes = document.querySelectorAll('.record-checkbox input[type="checkbox"]:checked');
-        
         if (e.target.id === 'selectAll') {
             checkboxes.forEach(checkbox => checkbox.checked = e.target.checked);
         }
         
+        const checkedBoxes = document.querySelectorAll('.record-checkbox input[type="checkbox"]:checked');
         deleteButton.style.display = checkedBoxes.length > 0 ? 'inline-block' : 'none';
     }
 });
