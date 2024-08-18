@@ -80,10 +80,10 @@ function displayRecords() {
     const recordsContainer = document.querySelector('#records .records-content');
     recordsContainer.innerHTML = '';
     
-    if (records.records.length === 0) {
+    if (records.getGroupedRecords().size === 0) {
         recordsContainer.innerHTML = '<p class="no-records">No records available</p>';
     } else {
-        const groupedRecords = records.groupRecordsByDate();
+        const groupedRecords = records.getGroupedRecords();
         const recordsList = createRecordsList(groupedRecords);
         recordsContainer.appendChild(recordsList);
     }
@@ -105,7 +105,7 @@ function createRecordsList(groupedRecords) {
 function createDateHeader(date) {
     const dateHeader = document.createElement('li');
     dateHeader.className = 'date-header';
-    const totalDuration = records.calculateTotalDurationForDate(date);
+    const totalDuration = records.getTotalDurationForDate(date);
     dateHeader.innerHTML = `
         <span class="date">${date}</span>
         <span class="total-duration">${totalDuration}</span>
