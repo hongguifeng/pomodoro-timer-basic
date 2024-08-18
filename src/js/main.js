@@ -120,7 +120,7 @@ function createRecordListItem(record, index) {
         <span class="record-item record-checkbox"><input type="checkbox" data-record-id="${record.id}"></span>
         <span class="record-item record-number">#${index}</span>
         <span class="record-item record-time">${record.startTime} - ${record.endTime}</span>
-        <span class="record-item record-duration">${record.duration}</span>
+        <span class="record-item record-duration">${records.formatDuration(record.duration)}</span>
     `;
     return li;
 }
