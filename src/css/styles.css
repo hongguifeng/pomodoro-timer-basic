@@ -12,16 +12,21 @@
 
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 20px;
     background-color: var(--light-gray);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .container {
     text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 #timer {
@@ -29,23 +34,58 @@ body {
     margin: 20px 0;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
 button {
-    font: 18px Arial, sans-serif;
-    padding: 10px 20px;
-    margin: 0 10px;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#startButton {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#resetButton {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+#addRecordButton {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+#deleteSelectedRecords {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
 }
 
 #records {
     margin-top: 20px;
     text-align: left;
-    overflow-y: auto;
     border: 1px solid var(--border-color);
     padding: 15px;
     background-color: #fff;
     box-shadow: 0 2px 5px var(--shadow-color);
     border-radius: 5px;
     width: 420px;
+    max-height: 50vh;
+    overflow-y: auto;
+    align-self: center;
 }
 
 #records h2 {
