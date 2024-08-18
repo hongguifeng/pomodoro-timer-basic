@@ -87,7 +87,7 @@ button:hover {
     z-index: 1;
 }
 
-.records-header h2 {
+.records-header h3 {
     margin-top: 0;
     padding-top: 15px;
 }
@@ -114,7 +114,6 @@ button:hover {
 }
 
 #records li {
-    margin-bottom: 10px;
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 5px;
@@ -126,7 +125,7 @@ button:hover {
     color: #fff;
     font-weight: bold;
     padding: 5px 10px;
-    margin: 20px 0 10px;
+    margin: 10px 0 5px;
     border-radius: 3px;
     display: flex;
     justify-content: space-between;
@@ -181,6 +180,7 @@ button:hover {
     margin-bottom: 5px;
     padding: 5px 0;
     border-bottom: 1px solid #eee;
+    overflow: hidden;
 }
 
 .record-item {
@@ -193,7 +193,7 @@ button:hover {
 }
 
 .record-number { flex: 0 0 45px; }
-.record-time { flex: 0 0 150px; }
+.record-time { flex: 0 0 140px; }
 .record-duration { flex: 1 0 75px; }
 .record-checkbox { flex: 0 0 30px; }
 
