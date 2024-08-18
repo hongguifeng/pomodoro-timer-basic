@@ -195,7 +195,7 @@ button:hover {
 .record-number { flex: 0 0 45px; }
 .record-time { flex: 0 0 140px; }
 .record-duration { flex: 1 0 75px; }
-.record-checkbox { flex: 0 0 30px; }
+.record-checkbox { flex: 0 0 20px; }
 
 .record-time {
     color: var(--time-color);
